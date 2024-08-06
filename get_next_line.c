@@ -6,7 +6,11 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/08/06 16:19:50 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:42:31 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+char	*get_next_line(int fd)
+{
+
+}
