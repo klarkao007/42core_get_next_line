@@ -6,11 +6,11 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/08/06 17:28:27 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:46:02 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
