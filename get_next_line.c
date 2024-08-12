@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/08/09 15:45:47 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:02:53 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,20 @@ char	*get_next_line(int fd)
 	}
 	return (NULL);
 }
+
+// FUNCTION LOGIC:
+// char	*get_next_line(int fd)
+
+// 	static char	*storage;
+// 	char	*line;
+
+// 	while (read(fd, buf, nbytes) > 0)
+// 	(copies nbytes to buf, moves the "cursor", returns n of bytes read (-1 error, 0 end of file))
+// 	strjoin buf to storage
+// 	if storage has \n
+// 		copy all from storage up to \n to line
+// 		delete all from storage up to \n
+// 		return line
+// 	else = read again
+// 	return NULL
+
