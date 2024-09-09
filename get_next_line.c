@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/09 13:32:57 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:50:22 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,20 @@ char	*fill_line_buf(int fd, char *storage, char *buf)
 
 char	*set_line(char *line_buf)
 {
+	char	*line;
+	char	*nl_ptr;
+	size_t	nl_index;
+
+	if (!line_buf)
+		return (NULL);
+	nl_ptr = ft_strchr(line_buf, '\n');
+	if (nl_ptr)
+		nl_index = nl_ptr - line_buf;
+	else
+		nl_index = ft_strlen(line_buf);
+	line = ft_substr(line_buf, 0, nl_index);
+	line_buf[nl_index] = '\0';
+	return (line);
 }
 
 char	*get_next_line(int fd)
