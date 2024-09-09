@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/09 10:10:11 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:32:57 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,19 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (new_str);
 }
 
-char	*fill_line_buf(int fd, char *left_c, char *buf)
+char	*fill_line_buf(int fd, char *storage, char *buf)
 {
+	int	bytes_read;
+
+	bytes_read = read(fd, buf, BUFFER_SIZE);
+	while (bytes_read > 0)
+	{
+		buf[bytes_read] = '\0';
+		storage = ft_strjoin(storage, buf);
+		if (ft_strchr(storage, '\n'))
+			return (storage);
+	}
+	return (storage);
 }
 
 char	*set_line(char *line_buf)
