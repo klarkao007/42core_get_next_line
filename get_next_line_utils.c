@@ -6,9 +6,11 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:54 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/09 10:07:07 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:59:08 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
