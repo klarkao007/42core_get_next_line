@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/13 16:27:36 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:49:36 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,23 +89,20 @@ char	*fill_line_buf(int fd, char *storage, char *buf)
 char	*set_line(char *line_buf)
 {
 	char	*storage;
-	char	*nl_ptr;
-	size_t	nl_index;
+	size_t	i;
 
-	if (!line_buf)
+	i = 0;
+	while (line_buf[i] != '\n' && line_buf[i] != '\0')
+		i++;
+	if (line_buf[i] == '\0' || line_buf[i + 1] == '\0')
 		return (NULL);
-	nl_ptr = ft_strchr(line_buf, '\n');
-	if (nl_ptr)
-		nl_index = nl_ptr - line_buf;
-	else
-		nl_index = ft_strlen(line_buf);
-	storage = ft_substr(line_buf, 0, nl_index);
+	storage = ft_substr(line_buf, i + 1, ft_strlen(line_buf) - i);
 	if (*storage == '\0')
 	{
 		free(storage);
 		storage = NULL;
 	}
-	line_buf[nl_index] = '\0';
+	line_buf[i + 1] = '\0';
 	return (storage);
 }
 
