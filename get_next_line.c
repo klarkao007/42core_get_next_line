@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/13 17:49:36 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/14 13:44:10 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,3 +131,49 @@ char	*get_next_line(int fd)
 	storage = set_line(next_line);
 	return (next_line);
 }
+
+// TEST WITH FILE test.txt
+//
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*r_line;
+//
+// 	fd = open("test.txt", O_RDONLY);
+// 	if (fd < 0)
+// 	{
+// 		write(1, "ERROR, FILE NOT FOUND!\n", 23);
+// 		return (0);
+// 	}
+// 	r_line = get_next_line(fd);
+// 	printf("%s", r_line);
+// 	if (r_line != NULL)
+// 		free(r_line);
+// 	r_line = get_next_line(fd);
+// 	printf("%s", r_line);
+// 	if (r_line != NULL)
+// 		free(r_line);
+// 	// r_line = get_next_line(fd);
+// 	// printf("%s", r_line);
+// 	// if (r_line != NULL)
+// 	// 	free(r_line);
+// 	return (0);
+// }
+//
+//
+// TEST FOR STANDARD INPUT
+//
+// int	main(void)
+// {
+// 	char	*r_line;
+//
+// 	r_line = get_next_line(1);
+// 	printf("%s", r_line);
+// 	if (r_line != NULL)
+// 		free(r_line);
+// 	r_line = get_next_line(1);
+// 	printf("%s", r_line);
+// 	if (r_line != NULL)
+// 		free(r_line);
+// 	return (0);
+// }
