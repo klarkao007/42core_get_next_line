@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/14 13:44:10 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/14 14:15:27 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*fill_line_buf(int fd, char *storage, char *buf)
 		else if (bytes_read == 0)
 			break ;
 		buf[bytes_read] = '\0';
-		if (storage == NULL)
+		if (!storage)
 			storage = ft_strdup("");
 		temp = storage;
 		storage = ft_strjoin(temp, buf);
