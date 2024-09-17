@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_line_buf_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/17 13:53:46 by kbachova         ###   ########.fr       */
+/*   Created: 2024/09/17 12:06:17 by kbachova          #+#    #+#             */
+/*   Updated: 2024/09/17 12:07:52 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -108,27 +108,27 @@ char	*set_line(char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*storage;
+	static char	*storage[1024];
 	char		*line;
 	char		*buf;
 
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		free(storage);
+		free(storage[fd]);
+		storage[fd] = NULL;
 		free(buf);
-		storage = NULL;
 		buf = NULL;
 		return (NULL);
 	}
 	if (!buf)
 		return (NULL);
-	line = fill_line_buf(fd, storage, buf);
+	line = fill_line_buf(fd, storage[fd], buf);
 	free(buf);
 	buf = NULL;
 	if (!line)
 		return (NULL);
-	storage = set_line(line);
+	storage[fd] = set_line(line);
 	return (line);
 }
 
