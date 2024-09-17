@@ -113,7 +113,7 @@ char	*get_next_line(int fd)
 	char		*buf;
 
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0 || !buf)
 	{
 		free(storage[fd]);
 		storage[fd] = NULL;
@@ -121,8 +121,6 @@ char	*get_next_line(int fd)
 		buf = NULL;
 		return (NULL);
 	}
-	if (!buf)
-		return (NULL);
 	line = fill_line_buf(fd, storage[fd], buf);
 	free(buf);
 	buf = NULL;
@@ -145,18 +143,18 @@ char	*get_next_line(int fd)
 // 		write(1, "ERROR, FILE NOT FOUND!\n", 23);
 // 		return (0);
 // 	}
-// 	r_line = get_line_buf(fd);
-// 	printf("%s", r_line);
+// 	r_line = get_next_line(fd);
+// 	printf("%s", get_next_line(fd));
 // 	if (r_line != NULL)
 // 		free(r_line);
-// 	r_line = get_line_buf(fd);
-// 	printf("%s", r_line);
+// 	r_line = get_next_line(fd);
+// 	printf("%s", get_next_line(fd));
 // 	if (r_line != NULL)
 // 		free(r_line);
-// 	// r_line = get_line_buf(fd);
-// 	// printf("%s", r_line);
-// 	// if (r_line != NULL)
-// 	// 	free(r_line);
+// 	r_line = get_next_line(fd);
+// 	printf("%s", get_next_line(fd));
+// 	if (r_line != NULL)
+// 		free(r_line);
 // 	return (0);
 // }
 //
@@ -167,11 +165,11 @@ char	*get_next_line(int fd)
 // {
 // 	char	*r_line;
 //
-// 	r_line = get_line_buf(1);
+// 	r_line = get_next_line(1);
 // 	printf("%s", r_line);
 // 	if (r_line != NULL)
 // 		free(r_line);
-// 	r_line = get_line_buf(1);
+// 	r_line = get_next_line(1);
 // 	printf("%s", r_line);
 // 	if (r_line != NULL)
 // 		free(r_line);
