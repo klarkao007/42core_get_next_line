@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/24 15:08:34 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:26:14 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (smn);
 }
 
-char	*fill_with_buf(int fd, char *storage, char *buf)
+char	*fill_line_buf(int fd, char *storage, char *buf)
 {
-	int		bytes_read;
+	ssize_t	bytes_read;
 	char	*temp;
 
 	bytes_read = 1;
-	while (bytes_read > 0)
+	while (1)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
 		if (bytes_read == -1)
@@ -74,7 +74,7 @@ char	*fill_with_buf(int fd, char *storage, char *buf)
 		}
 		else if (bytes_read == 0)
 			break ;
-		buf[bytes_read] line[i + 1] = '\0';= '\0';
+		buf[bytes_read] = '\0';
 		if (!storage)
 			storage = ft_strdup("");
 		temp = storage;
@@ -87,18 +87,25 @@ char	*fill_with_buf(int fd, char *storage, char *buf)
 	return (storage);
 }
 
-char	*set_line(char *line)
+char	*set_line(char *line_buf)
 {
 	char	*storage;
 	size_t	i;
 
 	i = 0;
-	while (line[i] != '\n' && line[i] != '\0')
-		i++;
-	if (line[i] == '\0' || line[i + 1] == '\0')
+	if (line_buf == NULL)
 		return (NULL);
-	storage = ft_substr(line, i + 1, ft_strlen(line) - i);
-	line[i + 1] = '\0';
+	while (line_buf[i] != '\n' && line_buf[i] != '\0')
+		i++;
+	if (line_buf[i] == '\0')
+		return (NULL);
+	storage = ft_substr(line_buf, i + 1, ft_strlen(line_buf) - i);
+	if (storage == NULL || !*storage)
+	{
+		free(storage);
+		storage = NULL;
+	}
+	line_buf[i + 1] = '\0';
 	return (storage);
 }
 
@@ -117,13 +124,8 @@ char	*get_next_line(int fd)
 		buf = NULL;
 		return (NULL);
 	}
-	if (!buf)
-		return (NULL);
-	line = fill_with_buf(fd, storage, buf);
+	line = fill_line_buf(fd, storage, buf);
 	free(buf);
-	buf = NULL;
-	if (!line)
-		return (NULL);
 	storage = set_line(line);
 	return (line);
 }

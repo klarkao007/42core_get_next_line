@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_line_buf_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:06:17 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/17 12:07:52 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:24:41 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (smn);
 }
 
-static char	*fill_line_buf(int fd, char *storage, char *buf)
+char	*fill_line_buf(int fd, char *storage, char *buf)
 {
-	int		bytes_read;
+	ssize_t	bytes_read;
 	char	*temp;
 
 	bytes_read = 1;
-	while (bytes_read > 0)
+	while (1)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
 		if (bytes_read == -1)
@@ -87,23 +87,25 @@ static char	*fill_line_buf(int fd, char *storage, char *buf)
 	return (storage);
 }
 
-static char	*set_line(char *line)
+char	*set_line(char *line_buf)
 {
 	char	*storage;
 	size_t	i;
 
 	i = 0;
-	while (line[i] != '\n' && line[i] != '\0')
-		i++;
-	if (line[i] == '\0' || line[i + 1] == '\0')
+	if (line_buf == NULL)
 		return (NULL);
-	storage = ft_substr(line, i + 1, ft_strlen(line) - i);
-	if (*storage == '\0' || storage == NULL)
+	while (line_buf[i] != '\n' && line_buf[i] != '\0')
+		i++;
+	if (line_buf[i] == '\0')
+		return (NULL);
+	storage = ft_substr(line_buf, i + 1, ft_strlen(line_buf) - i);
+	if (storage == NULL || !*storage)
 	{
 		free(storage);
 		storage = NULL;
 	}
-	line[i + 1] = '\0';
+	line_buf[i + 1] = '\0';
 	return (storage);
 }
 
@@ -113,8 +115,10 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buf;
 
+	if (fd < 0 || fd > 1024)
+		return (NULL);
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0 || !buf)
 	{
 		free(storage[fd]);
 		storage[fd] = NULL;
@@ -122,13 +126,8 @@ char	*get_next_line(int fd)
 		buf = NULL;
 		return (NULL);
 	}
-	if (!buff)
-		return (NULL);
 	line = fill_line_buf(fd, storage[fd], buf);
 	free(buf);
-	buf = NULL;
-	if (!line)
-		return (NULL);
 	storage[fd] = set_line(line);
 	return (line);
 }

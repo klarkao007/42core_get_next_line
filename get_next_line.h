@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:46 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/17 19:54:16 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:02:34 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 char	*get_next_line(int fd);
 char	*fill_line_buf(int fd, char *storage, char *buf);
-char	*set_line(char *line);
+char	*set_line(char *line_buf);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(char *s1);
