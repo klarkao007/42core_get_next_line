@@ -38,26 +38,27 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (subs);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	len1;
-	size_t	len2;
-	char	*new_str;
+	char			*smn;
+	unsigned int	i;
+	unsigned int	j;
 
-	if (!s1 || !s2)
+	i = 0;
+	j = 0;
+	smn = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!smn)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	new_str = (char *)malloc((len1 + len2 + 1) * sizeof(char));
-	if (!new_str)
-		return (NULL);
-	ft_memcpy(new_str, s1, len1);
-	ft_memcpy(new_str + len1, s2, len2);
-	new_str[len1 + len2] = '\0';
-	return (new_str);
+	while (s1[j])
+		smn[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		smn[i++] = s2[j++];
+	smn[i] = '\0';
+	return (smn);
 }
 
-char	*fill_line_buf(int fd, char *storage, char *buf)
+static char	*fill_line_buf(int fd, char *storage, char *buf)
 {
 	int		bytes_read;
 	char	*temp;
@@ -86,7 +87,7 @@ char	*fill_line_buf(int fd, char *storage, char *buf)
 	return (storage);
 }
 
-char	*set_line(char *line)
+static char	*set_line(char *line)
 {
 	char	*storage;
 	size_t	i;
@@ -97,7 +98,7 @@ char	*set_line(char *line)
 	if (line[i] == '\0' || line[i + 1] == '\0')
 		return (NULL);
 	storage = ft_substr(line, i + 1, ft_strlen(line) - i);
-	if (*storage == '\0')
+	if (*storage == '\0' || storage == NULL)
 	{
 		free(storage);
 		storage = NULL;
@@ -113,7 +114,7 @@ char	*get_next_line(int fd)
 	char		*buf;
 
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0 || !buf)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		free(storage[fd]);
 		storage[fd] = NULL;
@@ -121,6 +122,8 @@ char	*get_next_line(int fd)
 		buf = NULL;
 		return (NULL);
 	}
+	if (!buff)
+		return (NULL);
 	line = fill_line_buf(fd, storage[fd], buf);
 	free(buf);
 	buf = NULL;

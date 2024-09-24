@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:54 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/13 16:59:41 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:32:37 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,22 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (srclen);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(char *s1)
 {
-	int		len;
-	char	*new;
+	char			*dest;
+	unsigned int	i;
 
-	len = ft_strlen(s);
-	new = (char *)malloc((len + 1) * sizeof(char));
-	if (new == NULL)
+	dest = (char *) malloc(ft_strlen(s1) + 1);
+	if (!dest)
 		return (NULL);
-	ft_strlcpy(new, s, len + 1);
-	return (new);
+	i = 0;
+	while (s1[i])
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	dest[i] = 0;
+	return (dest);
 }
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)

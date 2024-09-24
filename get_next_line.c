@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/17 17:07:07 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:54:02 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,24 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (subs);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	len1;
-	size_t	len2;
-	char	*new_str;
+	char			*smn;
+	unsigned int	i;
+	unsigned int	j;
 
-	if (!s1 || !s2)
+	i = 0;
+	j = 0;
+	smn = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!smn)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	new_str = (char *)malloc((len1 + len2 + 1) * sizeof(char));
-	if (!new_str)
-		return (NULL);
-	ft_memcpy(new_str, s1, len1);
-	ft_memcpy(new_str + len1, s2, len2);
-	new_str[len1 + len2] = '\0';
-	return (new_str);
+	while (s1[j])
+		smn[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		smn[i++] = s2[j++];
+	smn[i] = '\0';
+	return (smn);
 }
 
 char	*fill_line_buf(int fd, char *storage, char *buf)
