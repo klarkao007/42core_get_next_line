@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/17 19:54:02 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:48:55 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (smn);
 }
 
-char	*fill_line_buf(int fd, char *storage, char *buf)
+char	*fill_with_buf(int fd, char *storage, char *buf)
 {
 	int		bytes_read;
 	char	*temp;
@@ -124,7 +124,7 @@ char	*get_next_line(int fd)
 	}
 	if (!buf)
 		return (NULL);
-	line = fill_line_buf(fd, storage, buf);
+	line = fill_with_buf(fd, storage, buf);
 	free(buf);
 	buf = NULL;
 	if (!line)
@@ -146,18 +146,9 @@ char	*get_next_line(int fd)
 // 		write(1, "ERROR, FILE NOT FOUND!\n", 23);
 // 		return (0);
 // 	}
-// 	r_line = get_next_line(fd);
 // 	printf("%s", get_next_line(fd));
-// 	if (r_line != NULL)
-// 		free(r_line);
-// 	r_line = get_next_line(fd);
 // 	printf("%s", get_next_line(fd));
-// 	if (r_line != NULL)
-// 		free(r_line);
-// 	r_line = get_next_line(fd);
 // 	printf("%s", get_next_line(fd));
-// 	if (r_line != NULL)
-// 		free(r_line);
 // 	return (0);
 // }
 //
