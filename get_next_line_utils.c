@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:54 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/17 19:32:37 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:17:17 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*ft_strchr(const char *s, int c)
 	int	i;
 
 	i = 0;
+	if (s == NULL)
+		return (NULL);
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char)c)

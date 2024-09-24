@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/24 17:26:14 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:28:15 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
+	if (s1 == NULL)
+		return (NULL);
 	smn = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!smn)
 		return (NULL);
@@ -63,7 +65,6 @@ char	*fill_line_buf(int fd, char *storage, char *buf)
 	ssize_t	bytes_read;
 	char	*temp;
 
-	bytes_read = 1;
 	while (1)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);

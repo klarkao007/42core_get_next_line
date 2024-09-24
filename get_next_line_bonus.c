@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:06:17 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/24 17:24:41 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:18:29 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
+	if (s1 == NULL)
+		return (NULL);
 	smn = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!smn)
 		return (NULL);
