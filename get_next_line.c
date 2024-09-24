@@ -6,7 +6,7 @@
 /*   By: kbachova <kbachova@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 16:19:49 by kbachova          #+#    #+#             */
-/*   Updated: 2024/09/24 14:53:23 by kbachova         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:08:34 by kbachova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*fill_with_buf(int fd, char *storage, char *buf)
 		}
 		else if (bytes_read == 0)
 			break ;
-		buf[bytes_read] = '\0';
+		buf[bytes_read] line[i + 1] = '\0';= '\0';
 		if (!storage)
 			storage = ft_strdup("");
 		temp = storage;
